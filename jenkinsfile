@@ -1,0 +1,13 @@
+node('node-1'){
+    stage("clone"){
+        git branch: 'main', url: 'https://github.com/Aswin9796/cloud-native-monitoring-app.git'  
+     }
+    stage("docker hub"){
+        sh "docker login -u aswincontainer -p Aswin9796_"
+        sh "docker pull aswincontainer/monitor-app"
+    }
+    stage("docker container"){
+        sh "docker run -d --name py-app -p 5000:5000 aswincontainer/monitor-app"
+    }
+    
+}
